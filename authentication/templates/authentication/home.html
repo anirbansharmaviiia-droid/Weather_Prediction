@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef6ff;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .container {
+            background: white;
+            width: 450px;
+            max-width: 90%;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1976d2;
+        }
+
+        input {
+            padding: 12px;
+            width: 230px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #1976d2;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #125ca1;
+        }
+
+        .weather {
+            margin-top: 30px;
+        }
+
+        .weather img {
+            width: 80px;
+        }
+
+        .error {
+            margin-top: 20px;
+            color: red;
+        }
+
+        .weather p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🌦️ Weather App</h1>
+
+        <p>Check the current weather of any city.</p>
+
+        <form method="GET">
+
+            <input
+                type="text"
+                name="city"
+                placeholder="Enter city name"
+                required
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+        {% if error %}
+            <div class="error">
+                <p>{{ error }}</p>
+            </div>
+        {% endif %}
+
+        {% if weather %}
+
+            <div class="weather">
+
+                <h2>{{ weather.city }}</h2>
+
+                <img
+                    src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png"
+                    alt="{{ weather.description }}"
+                >
+
+                <h2>{{ weather.temperature }}°C</h2>
+
+                <p>
+                    🌡️ Feels like:
+                    {{ weather.feels_like }}°C
+                </p>
+
+                <p>
+                    ☁️ Condition:
+                    {{ weather.description|title }}
+                </p>
+
+                <p>
+                    💧 Humidity:
+                    {{ weather.humidity }}%
+                </p>
+
+                <p>
+                    📊 Pressure:
+                    {{ weather.pressure }} hPa
+                </p>
+
+                <p>
+                    🌬️ Wind Speed:
+                    {{ weather.wind_speed }} m/s
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
